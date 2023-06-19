@@ -7,6 +7,8 @@ public class Main {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     FinancialManager financialManager = new FinancialManager();
+    FinancialEditor financialEditor = new FinancialEditor(financialManager.getIncomeList(),
+        financialManager.getExpenseList(), scanner);
 
     while (true) {
       System.out.println("\n--- Управление финансами ---");
@@ -25,17 +27,15 @@ public class Main {
       String choice = scanner.nextLine();
 
       switch (choice) {
-        case "0":
-          financialManager.getCurrentBalance(); // Вывод текущего баланса
-          break;
+
         case "1":
           financialManager.displayExpenses(); // Вывод текущих расходов
           break;
         case "2":
-          financialManager.addIncome(); // Добавление дохода
+          financialManager.addIncome(ChooseCategory.chooseCategory()); // Добавление дохода с выбором категории
           break;
         case "3":
-          financialManager.addExpense(); // Добавление расхода
+          financialManager.addExpense(ChooseCategory.chooseCategory()); // Добавление расхода с выбором категории
           break;
         case "4":
           financialManager.removeExpensesByDate(); // Удаление расходов по дате
