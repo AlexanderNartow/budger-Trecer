@@ -7,7 +7,7 @@ public class Main {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     FinancialManager financialManager = new FinancialManager();
-    FinancialEditor financialEditor = new FinancialEditor(financialManager.getIncomeList(),
+    FinancialManager financialEditor = new FinancialManager(financialManager.getIncomeList(),
         financialManager.getExpenseList(), scanner);
 
     while (true) {

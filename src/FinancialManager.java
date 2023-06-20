@@ -11,6 +11,9 @@ public class FinancialManager {
         expenseList = new ArrayList<>();
     }
 
+    public FinancialManager(List<Double> incomeList, List<Double> expenseList, Scanner scanner) {
+    }
+
     public List<Double> getIncomeList() {
         return incomeList;
     }
