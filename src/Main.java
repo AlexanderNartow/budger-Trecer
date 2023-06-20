@@ -30,10 +30,12 @@ public class Main {
           financialManager.displayExpenses(); // Вывод текущих расходов
           break;
         case "2":
-          financialManager.addIncome(ChooseCategory.chooseCategory()); // Добавление дохода с выбором категории
+          financialManager.addIncome(
+              ChooseCategory.chooseCategory()); // Добавление дохода с выбором категории
           break;
         case "3":
-          financialManager.addExpense(ChooseCategory.chooseCategory(), scanner); // Добавление расхода с выбором категории
+          financialManager.addExpense(ChooseCategory.chooseCategory(),
+              scanner); // Добавление расхода с выбором категории
           break;
         case "4":
           financialManager.removeExpensesByDate(); // Удаление расходов по дате
