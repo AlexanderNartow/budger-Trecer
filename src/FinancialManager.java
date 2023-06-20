@@ -42,10 +42,10 @@ public class FinancialManager {
         System.out.println("Доход в категории '" + category + "' успешно добавлен.");
     }
 
-    public void addExpense(String category) {
+    public void addExpense(String category, Scanner scanner) {
         System.out.print("Введите сумму расхода: ");
-        double amount = scanner.nextDouble();
-        scanner.nextLine();
+        double amount = this.scanner.nextDouble();
+        this.scanner.nextLine();
 
         expenseList.add(amount);
         System.out.println("Расход в категории '" + category + "' успешно добавлен.");
@@ -75,5 +75,19 @@ public class FinancialManager {
 
     public void displayFinancialHistory() {
         // Implement logic to display financial history
+    }
+
+    public void setIncomeList(List<Double> incomeList) {
+    }
+
+    public void setExpenseList(List<Double> expenseList) {
+    }
+
+    public double calculateTotal() {
+
+      return 0;
+    }
+
+    public void addIncome(String salary, Scanner scanner) {
     }
 }

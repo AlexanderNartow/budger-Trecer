@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -35,7 +33,7 @@ public class Main {
           financialManager.addIncome(ChooseCategory.chooseCategory()); // Добавление дохода с выбором категории
           break;
         case "3":
-          financialManager.addExpense(ChooseCategory.chooseCategory()); // Добавление расхода с выбором категории
+          financialManager.addExpense(ChooseCategory.chooseCategory(), scanner); // Добавление расхода с выбором категории
           break;
         case "4":
           financialManager.removeExpensesByDate(); // Удаление расходов по дате
