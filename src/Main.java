@@ -5,6 +5,7 @@ public class Main {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     FinancialManager financialManager = new FinancialManager();
+    TrackerSave trackerSave=new TrackerSave();
 
     while (true) {
       System.out.println("\n--- Управление финансами ---");
@@ -41,7 +42,7 @@ public class Main {
           financialManager.removeIncomeByDate(); // Удаление доходов по дате
           break;
         case "6":
-          financialManager.saveFinances(); // Сохранение финансов
+          financialManager.saveFinancialHistory(); // Сохранение финансов
           break;
         case "7":
           financialManager.editFinances(); // Редактирование финансов

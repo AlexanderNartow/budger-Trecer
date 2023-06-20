@@ -7,7 +7,7 @@ public class TrackerSave {
   private static final String FILE_PATH = "tracker.csv";
   private static final String CSV_SEPARATOR = ",";
 
-  public static void saveFinancialHistory(List<Double> incomeList, List<Double> expenseList) {
+  public static void saveFinancialHistory(List<Double> incomeList, List<Double> expenseList){
     try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
       writer.println("Доходы");
       for (double income : incomeList) {
