@@ -24,8 +24,9 @@ public class Main {
 
       switch (choice) {
 
+
         case "1":
-          financialManager.displayExpenses(); // Вывод текущих расходов
+          financialManager.displayBalance(); // Вывод текущих расходов
           break;
         case "2":
           financialManager.addIncome(ChooseCategory.chooseCategory(), scanner); // Добавление дохода с выбором категории
