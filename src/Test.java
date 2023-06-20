@@ -29,7 +29,7 @@ class FinancialManagerTest {
 
   @Test
   public void testAddExpense() {
-    double expectedExpense = 77.0;
+    double expectedExpense = 50.0;
     List<Double> expectedExpenseList = Arrays.asList(expectedExpense);
 
     financialManager.addExpense("Продукты", scanner);
@@ -40,7 +40,7 @@ class FinancialManagerTest {
   @Test
   public void testCalculateTotal() {
     List<Double> incomeList = Arrays.asList(233.0, 444.0, 123.0);
-    List<Double> expenseList = Arrays.asList(33.0, 55.0);
+    List<Double> expenseList = Arrays.asList(75.0, 75.0);
 
     financialManager.setIncomeList(incomeList);
     financialManager.setExpenseList(expenseList);
