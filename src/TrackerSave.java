@@ -7,6 +7,11 @@ public class TrackerSave {
   private static final String FILE_PATH = "tracker.csv";
   private static final String CSV_SEPARATOR = ",";
 
+  /**
+   *
+   * @param incomeList
+   * @param expenseList
+   */
   public static void saveFinancialHistory(List<Double> incomeList, List<Double> expenseList){
     try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
       writer.println("Доходы");
@@ -24,6 +29,11 @@ public class TrackerSave {
     }
   }
 
+  /**
+   *
+   * @param type
+   * @return
+   */
   public static List<Double> readFinancialDataByType(String type) {
     List<Double> data = new ArrayList<>();
 
