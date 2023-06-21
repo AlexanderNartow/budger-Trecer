@@ -9,7 +9,6 @@ public class Main {
 
     while (true) {
       System.out.println("\n--- Управление финансами ---");
-      System.out.println("0. Текущее состояние баланса");
       System.out.println("1. Текущие расходы");
       System.out.println("2. Добавить доход по категории");
       System.out.println("3. Добавить расход по категории");
