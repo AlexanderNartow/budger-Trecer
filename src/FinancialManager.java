@@ -12,10 +12,10 @@ public class FinancialManager {
       System.in); // Инициализация сканнера для считывания пользовательского ввода
 
   public FinancialManager() {
-    incomeList = TrackerSave.readFinancialDataByType("Доходы");
-    expenseList = TrackerSave.readFinancialDataByType("Расходы");
     incomeCategories = new ArrayList<>(); // Инициализация списка категорий доходов
     expenseCategories = new ArrayList<>(); // Инициализация списка категорий расходов
+    incomeList = TrackerSave.readFinancialDataByType("Доходы", incomeCategories);
+    expenseList = TrackerSave.readFinancialDataByType("Расходы", expenseCategories);
   }
 
   public List<Double> getIncomeList() {
@@ -42,9 +42,8 @@ public class FinancialManager {
   }
 
   /**
-   *
    * @param category категория дохода
-   * @param scanner объект Scanner для чтения пользовательского ввода
+   * @param scanner  объект Scanner для чтения пользовательского ввода
    */
   public void addIncome(String category, Scanner scanner) {
     System.out.print("Введите сумму дохода: ");
@@ -187,12 +186,13 @@ public class FinancialManager {
     System.out.println("История финансов:");
     System.out.println("Доходы:");
     for (int i = 0; i < incomeList.size(); i++) {
-      System.out.println("Доход #" + (i + 1) + ": Сумма: " + incomeList.get(i));
+      System.out.println(
+          (i + 1) + ": " + incomeCategories.get(i) + ": Сумма: " + incomeList.get(i));
     }
 
     System.out.println("Расходы:");
     for (int i = 0; i < expenseList.size(); i++) {
-      System.out.println("Расход #" + (i + 1) + ": Сумма: " + expenseList.get(i));
+      System.out.println((i + 1) + ": " + incomeCategories.get(i) + ": Сумма: " + expenseList.get(i));
     }
   }
 

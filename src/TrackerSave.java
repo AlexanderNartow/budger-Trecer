@@ -38,7 +38,7 @@ public class TrackerSave {
    * @param type
    * @return
    */
-  public static List<Double> readFinancialDataByType(String type) {
+  public static List<Double> readFinancialDataByType(String type, List<String> categories) {
     List<Double> data = new ArrayList<>();
     Map<String, Double> categorySums = new HashMap<>();
 
@@ -59,6 +59,7 @@ public class TrackerSave {
 
                 // Update category sums
                 String category = parts[0];
+                categories.add(category);
                 if (categorySums.containsKey(category)) {
                   double sum = categorySums.get(category);
                   categorySums.put(category, sum + amount);
