@@ -3,15 +3,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FinancialManager {
+
   private List<String> incomeCategories; // Список категорий доходов
   private List<String> expenseCategories; // Список категорий расходов
   private List<Double> incomeList; // Список доходов
   private List<Double> expenseList; // Список расходов
-  Scanner scanner = new Scanner(System.in); // Инициализация сканнера для считывания пользовательского ввода
+  Scanner scanner = new Scanner(
+      System.in); // Инициализация сканнера для считывания пользовательского ввода
 
   public FinancialManager() {
     incomeList = new ArrayList<>(); // Инициализация списка доходов
     expenseList = new ArrayList<>(); // Инициализация списка расходов
+    incomeCategories = new ArrayList<>(); // Инициализация списка категорий доходов
+    expenseCategories = new ArrayList<>(); // Инициализация списка категорий расходов
   }
 
   public List<Double> getIncomeList() {
@@ -25,7 +29,8 @@ public class FinancialManager {
   public void displayBalance() {
     double totalIncome = calculateTotal(incomeList); // Рассчитывает сумму всех доходов
     double totalExpense = calculateTotal(expenseList); // Рассчитывает сумму всех расходов
-    double balance = totalIncome - totalExpense; // Рассчитывает баланс (разницу между доходами и расходами)
+    double balance =
+        totalIncome - totalExpense; // Рассчитывает баланс (разницу между доходами и расходами)
     System.out.println("Текущий баланс: " + balance); // Выводит текущий баланс
   }
 
@@ -43,10 +48,7 @@ public class FinancialManager {
 
     incomeList.add(amount); // Добавляет сумму дохода в список доходов
     System.out.println("Доход в категории '" + category + "' успешно добавлен.");
-
-    System.out.print("Введите категорию дохода: ");
-    String incomeCategory = scanner.nextLine(); // Считывает категорию дохода из ввода пользователя
-    incomeCategories.add(incomeCategory); // Добавляет категорию дохода в список категорий доходов
+    incomeCategories.add(category); // Добавляет категорию дохода в список категорий доходов
   }
 
   public List<String> getIncomeCategories() {
@@ -64,6 +66,7 @@ public class FinancialManager {
   public void setExpenseCategories(List<String> expenseCategories) {
     this.expenseCategories = expenseCategories; // Устанавливает список категорий расходов
   }
+
   public void addExpense(String category, Scanner scanner) {
     System.out.print("Введите сумму расхода: ");
     double amount = this.scanner.nextDouble();
@@ -133,8 +136,7 @@ public class FinancialManager {
     double newIncome = scanner.nextDouble();
     scanner.nextLine();
 
-    System.out.print("Введите новую категорию дохода: ");
-    String newIncomeCategory = scanner.nextLine();
+    String newIncomeCategory = ChooseCategory.chooseCategory();
 
     incomeList.set(index - 1, newIncome);
     incomeCategories.set(index - 1, newIncomeCategory);
