@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TrackerSave {
 
@@ -38,6 +40,7 @@ public class TrackerSave {
    */
   public static List<Double> readFinancialDataByType(String type) {
     List<Double> data = new ArrayList<>();
+    Map<String, Double> categorySums = new HashMap<>();
 
     try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
       String line;
@@ -49,10 +52,19 @@ public class TrackerSave {
         } else if (line.contains(CSV_SEPARATOR)) {
           if (shouldRead) {
             String[] parts = line.split(CSV_SEPARATOR);
-            if (parts.length == 2){
+            if (parts.length == 2) {
               try {
                 double amount = Double.parseDouble(parts[1]);
                 data.add(amount);
+
+                // Update category sums
+                String category = parts[0];
+                if (categorySums.containsKey(category)) {
+                  double sum = categorySums.get(category);
+                  categorySums.put(category, sum + amount);
+                } else {
+                  categorySums.put(category, amount);
+                }
               } catch (NumberFormatException e) {
                 System.out.println("Ошибка при чтении данных.");
                 e.printStackTrace();
@@ -67,6 +79,11 @@ public class TrackerSave {
       System.out.println("Ошибка при чтении файла " + FILE_PATH);
       e.printStackTrace();
     }
+
+    // Print category sums
+    for (Map.Entry<String, Double> entry : categorySums.entrySet()) {
+      System.out.println("Категория: " + entry.getKey() + ", Сумма: " + entry.getValue());
+    }
+
     return data;
-  }
-}
+}}
