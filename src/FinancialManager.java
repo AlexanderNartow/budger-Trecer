@@ -78,6 +78,7 @@ public class FinancialManager {
 
     expenseList.add(amount);
     System.out.println("Расход в категории '" + category + "' успешно добавлен.");
+    expenseCategories.add(category);
   }
 
   private double calculateTotal(List<Double> amounts) {
@@ -192,7 +193,8 @@ public class FinancialManager {
 
     System.out.println("Расходы:");
     for (int i = 0; i < expenseList.size(); i++) {
-      System.out.println((i + 1) + ": " + incomeCategories.get(i) + ": Сумма: " + expenseList.get(i));
+      System.out.println(
+              (i + 1) + ": " + incomeCategories.get(i) + ": Сумма: " + expenseList.get(i));
     }
   }
 
