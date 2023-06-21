@@ -5,7 +5,7 @@ public class Main {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     FinancialManager financialManager = new FinancialManager();
-    TrackerSave trackerSave=new TrackerSave();
+    TrackerSave trackerSave = new TrackerSave();
 
     while (true) {
       System.out.println("\n--- Управление финансами ---");
@@ -24,15 +24,16 @@ public class Main {
 
       switch (choice) {
 
-
         case "1":
           financialManager.displayBalance(); // Вывод текущих расходов
           break;
         case "2":
-          financialManager.addIncome(ChooseCategory.chooseCategory(), scanner); // Добавление дохода с выбором категории
+          financialManager.addIncome(ChooseCategory.chooseCategory(),
+              scanner); // Добавление дохода с выбором категории
           break;
         case "3":
-          financialManager.addExpense(ChooseCategory.chooseCategory(), scanner); // Добавление расхода с выбором категории
+          financialManager.addExpense(ChooseCategory.chooseCategory(),
+              scanner); // Добавление расхода с выбором категории
           break;
         case "4":
           financialManager.removeExpensesByDate(); // Удаление расходов по дате

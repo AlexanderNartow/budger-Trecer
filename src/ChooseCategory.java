@@ -29,7 +29,7 @@ public class ChooseCategory {
           return "Продукты";
         default:
           System.out.println("Некорректный выбор категории.");
-          return null;
+          return "Некорректный выбор категории.";
       }
     } catch (Exception e) {
       System.out.println("Ошибка при вводе категории: " + e.getMessage());
