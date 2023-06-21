@@ -12,8 +12,8 @@ public class FinancialManager {
       System.in); // Инициализация сканнера для считывания пользовательского ввода
 
   public FinancialManager() {
-    incomeList = new ArrayList<>(); // Инициализация списка доходов
-    expenseList = new ArrayList<>(); // Инициализация списка расходов
+    incomeList = TrackerSave.readFinancialDataByType("Доходы");
+    expenseList = TrackerSave.readFinancialDataByType("Расходы");
     incomeCategories = new ArrayList<>(); // Инициализация списка категорий доходов
     expenseCategories = new ArrayList<>(); // Инициализация списка категорий расходов
   }
@@ -90,7 +90,7 @@ public class FinancialManager {
   }
 
   public void saveFinances() {
-    TrackerSave.saveFinancialHistory(incomeList, expenseList);
+    TrackerSave.saveFinancialHistory(incomeCategories, incomeList, expenseCategories, expenseList);
     System.out.println("Финансовые данные успешно сохранены.");
   }
 
@@ -187,18 +187,18 @@ public class FinancialManager {
     System.out.println("История финансов:");
     System.out.println("Доходы:");
     for (int i = 0; i < incomeList.size(); i++) {
-      System.out.println("Доход #" + (i + 1) + ": " + incomeList.get(i));
+      System.out.println("Доход #" + (i + 1) + ": Сумма: " + incomeList.get(i));
     }
 
     System.out.println("Расходы:");
     for (int i = 0; i < expenseList.size(); i++) {
-      System.out.println("Расход #" + (i + 1) + ": " + expenseList.get(i));
+      System.out.println("Расход #" + (i + 1) + ": Сумма: " + expenseList.get(i));
     }
-
   }
 
   public void saveFinancialHistory() {
-    TrackerSave.saveFinancialHistory(incomeList, expenseList);
+    TrackerSave.saveFinancialHistory(incomeCategories, incomeList, expenseCategories, expenseList);
+    System.out.println("Финансовые данные успешно сохранены.");
   }
 
 }

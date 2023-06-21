@@ -5,7 +5,6 @@ public class Main {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     FinancialManager financialManager = new FinancialManager();
-    TrackerSave trackerSave=new TrackerSave();
 
     while (true) {
       System.out.println("\n--- Управление финансами ---");

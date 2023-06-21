@@ -4,23 +4,25 @@ import java.util.List;
 
 public class TrackerSave {
 
-  private static final String FILE_PATH = "res/tracker.csv";
+  private static final String FILE_PATH = "res/trackers.csv";
   private static final String CSV_SEPARATOR = ",";
 
   /**
-   *
+   * @param incomeCategories
    * @param incomeList
+   * @param expenseCategories
    * @param expenseList
    */
-  public static void saveFinancialHistory(List<Double> incomeList, List<Double> expenseList){
+  public static void saveFinancialHistory(List<String> incomeCategories, List<Double> incomeList,
+      List<String> expenseCategories, List<Double> expenseList){
     try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
       writer.println("Доходы");
-      for (double income : incomeList) {
-        writer.println(CSV_SEPARATOR + income);
+      for (int i = 0; i < incomeList.size(); i++) {
+        writer.println(incomeCategories.get(i) + CSV_SEPARATOR + incomeList.get(i));
       }
       writer.println("Расходы");
-      for (double expense : expenseList) {
-        writer.println(CSV_SEPARATOR + expense);
+      for (int i = 0; i < expenseList.size(); i++) {
+        writer.println(expenseCategories.get(i) + CSV_SEPARATOR + expenseList.get(i));
       }
       System.out.println("История успешно сохранена в файле " + FILE_PATH);
     } catch (IOException e) {
@@ -30,12 +32,9 @@ public class TrackerSave {
   }
 
   /**
-   * Считывает финансовые данные из указанного файла по заданному типу (Доход или Расход)
-   * и возвращает список сумм.
    *
-   * @param type тип финансовых данных для чтения (доходы или расходы)
-   * @return список двойных значений, представляющих суммы финансовых данных
-   *
+   * @param type
+   * @return
    */
   public static List<Double> readFinancialDataByType(String type) {
     List<Double> data = new ArrayList<>();
@@ -50,7 +49,7 @@ public class TrackerSave {
         } else if (line.contains(CSV_SEPARATOR)) {
           if (shouldRead) {
             String[] parts = line.split(CSV_SEPARATOR);
-            if (parts.length == 2 && parts[0].equals("Income") || parts[0].equals("Expense")) {
+            if (parts.length == 2){
               try {
                 double amount = Double.parseDouble(parts[1]);
                 data.add(amount);
