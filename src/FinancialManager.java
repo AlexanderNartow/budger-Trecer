@@ -202,4 +202,5 @@ public class FinancialManager {
   public void saveFinancialHistory() {
     TrackerSave.saveFinancialHistory(incomeList, expenseList);
   }
+
 }
