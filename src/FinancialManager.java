@@ -3,47 +3,67 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FinancialManager {
-
-  private List<Double> incomeList;
-  private List<Double> expenseList;
-  Scanner scanner = new Scanner(System.in);
+  private List<String> incomeCategories; // Список категорий доходов
+  private List<String> expenseCategories; // Список категорий расходов
+  private List<Double> incomeList; // Список доходов
+  private List<Double> expenseList; // Список расходов
+  Scanner scanner = new Scanner(System.in); // Инициализация сканнера для считывания пользовательского ввода
 
   public FinancialManager() {
-    incomeList = new ArrayList<>();
-    expenseList = new ArrayList<>();
+    incomeList = new ArrayList<>(); // Инициализация списка доходов
+    expenseList = new ArrayList<>(); // Инициализация списка расходов
   }
 
   public List<Double> getIncomeList() {
-    return incomeList;
+    return incomeList; // Возвращает список доходов
   }
 
   public List<Double> getExpenseList() {
-    return expenseList;
+    return expenseList; // Возвращает список расходов
   }
 
   public void displayBalance() {
-    double totalIncome = calculateTotal(incomeList);
-    double totalExpense = calculateTotal(expenseList);
-    double balance = totalIncome - totalExpense;
-    System.out.println("Текущий баланс: " + balance);
+    double totalIncome = calculateTotal(incomeList); // Рассчитывает сумму всех доходов
+    double totalExpense = calculateTotal(expenseList); // Рассчитывает сумму всех расходов
+    double balance = totalIncome - totalExpense; // Рассчитывает баланс (разницу между доходами и расходами)
+    System.out.println("Текущий баланс: " + balance); // Выводит текущий баланс
   }
 
   public void displayExpenses() {
     System.out.println("Текущие расходы: ");
     for (double expense : expenseList) {
-      System.out.println(expense);
+      System.out.println(expense); // Выводит текущие расходы
     }
   }
 
   public void addIncome(String category, Scanner scanner) {
     System.out.print("Введите сумму дохода: ");
-    double amount = this.scanner.nextDouble();
+    double amount = this.scanner.nextDouble(); // Считывает сумму дохода из ввода пользователя
     this.scanner.nextLine();
 
-    incomeList.add(amount);
+    incomeList.add(amount); // Добавляет сумму дохода в список доходов
     System.out.println("Доход в категории '" + category + "' успешно добавлен.");
+
+    System.out.print("Введите категорию дохода: ");
+    String incomeCategory = scanner.nextLine(); // Считывает категорию дохода из ввода пользователя
+    incomeCategories.add(incomeCategory); // Добавляет категорию дохода в список категорий доходов
   }
 
+  public List<String> getIncomeCategories() {
+    return incomeCategories; // Возвращает список категорий доходов
+  }
+
+  public List<String> getExpenseCategories() {
+    return expenseCategories; // Возвращает список категорий расходов
+  }
+
+  public void setIncomeCategories(List<String> incomeCategories) {
+    this.incomeCategories = incomeCategories; // Устанавливает список категорий доходов
+  }
+
+  public void setExpenseCategories(List<String> expenseCategories) {
+    this.expenseCategories = expenseCategories; // Устанавливает список категорий расходов
+  }
   public void addExpense(String category, Scanner scanner) {
     System.out.print("Введите сумму расхода: ");
     double amount = this.scanner.nextDouble();
@@ -70,7 +90,8 @@ public class FinancialManager {
   }
 
   public void saveFinances() {
-    // Implement logic to save finances to a file
+    TrackerSave.saveFinancialHistory(incomeList, expenseList);
+    System.out.println("Финансовые данные успешно сохранены.");
   }
 
   public void editFinances() {
@@ -110,9 +131,14 @@ public class FinancialManager {
 
     System.out.print("Введите новое значение дохода: ");
     double newIncome = scanner.nextDouble();
-    scanner.nextLine(); // Считываем лишний символ перевода строки
+    scanner.nextLine();
+
+    System.out.print("Введите новую категорию дохода: ");
+    String newIncomeCategory = scanner.nextLine();
 
     incomeList.set(index - 1, newIncome);
+    incomeCategories.set(index - 1, newIncomeCategory);
+
     System.out.println("Доход успешно отредактирован.");
   }
 
@@ -132,17 +158,26 @@ public class FinancialManager {
 
     System.out.print("Введите новое значение расхода: ");
     double newExpense = scanner.nextDouble();
-    scanner.nextLine(); // Считываем лишний символ перевода строки
+    scanner.nextLine();
+
+    System.out.print("Введите новую категорию расхода: ");
+    String newExpenseCategory = scanner.nextLine();
 
     expenseList.set(index - 1, newExpense);
+    expenseCategories.set(index - 1, newExpenseCategory);
+
     System.out.println("Расход успешно отредактирован.");
   }
 
+
   public void setIncomeList(List<Double> incomeList) {
+    this.incomeList = incomeList;
   }
 
   public void setExpenseList(List<Double> expenseList) {
+    this.expenseList = expenseList;
   }
+
 
   public double calculateTotal() {
     return 0;
