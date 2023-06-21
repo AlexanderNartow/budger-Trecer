@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TrackerSave {
 
-  private static final String FILE_PATH = "tracker.csv";
+  private static final String FILE_PATH = "res/tracker.csv";
   private static final String CSV_SEPARATOR = ",";
 
   /**
@@ -16,11 +16,11 @@ public class TrackerSave {
     try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
       writer.println("Доходы");
       for (double income : incomeList) {
-        writer.println("Income" + CSV_SEPARATOR + income);
+        writer.println(CSV_SEPARATOR + income);
       }
       writer.println("Расходы");
       for (double expense : expenseList) {
-        writer.println("Expense" + CSV_SEPARATOR + expense);
+        writer.println(CSV_SEPARATOR + expense);
       }
       System.out.println("История успешно сохранена в файле " + FILE_PATH);
     } catch (IOException e) {
