@@ -34,12 +34,6 @@ public class Main {
         case "3":
           financialManager.addExpense(ChooseCategory.chooseCategory(), scanner); // Добавление расхода с выбором категории
           break;
-        case "4":
-          financialManager.removeExpensesByDate(); // Удаление расходов по дате
-          break;
-        case "5":
-          financialManager.removeIncomeByDate(); // Удаление доходов по дате
-          break;
         case "6":
           financialManager.saveFinancialHistory(); // Сохранение финансов
           break;

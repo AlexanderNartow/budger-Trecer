@@ -30,9 +30,12 @@ public class TrackerSave {
   }
 
   /**
+   * Считывает финансовые данные из указанного файла по заданному типу (Доход или Расход)
+   * и возвращает список сумм.
    *
-   * @param type
-   * @return
+   * @param type тип финансовых данных для чтения (доходы или расходы)
+   * @return список двойных значений, представляющих суммы финансовых данных
+   *
    */
   public static List<Double> readFinancialDataByType(String type) {
     List<Double> data = new ArrayList<>();

@@ -41,6 +41,11 @@ public class FinancialManager {
     }
   }
 
+  /**
+   *
+   * @param category категория дохода
+   * @param scanner объект Scanner для чтения пользовательского ввода
+   */
   public void addIncome(String category, Scanner scanner) {
     System.out.print("Введите сумму дохода: ");
     double amount = this.scanner.nextDouble(); // Считывает сумму дохода из ввода пользователя
@@ -84,14 +89,6 @@ public class FinancialManager {
     return total;
   }
 
-  public void removeExpensesByDate() {
-    // Implement logic to remove expenses by
-  }
-
-  public void removeIncomeByDate() {
-    // Implement logic to remove income by date
-  }
-
   public void saveFinances() {
     TrackerSave.saveFinancialHistory(incomeList, expenseList);
     System.out.println("Финансовые данные успешно сохранены.");
@@ -117,6 +114,7 @@ public class FinancialManager {
         break;
     }
   }
+
 
   private void editIncome() {
     System.out.println("Выберите номер дохода, который вы хотите отредактировать:");
