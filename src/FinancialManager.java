@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -46,13 +47,32 @@ public class FinancialManager {
    * @param scanner  объект Scanner для чтения пользовательского ввода
    */
   public void addIncome(String category, Scanner scanner) {
-    System.out.print("Введите сумму дохода: ");
-    double amount = this.scanner.nextDouble(); // Считывает сумму дохода из ввода пользователя
-    this.scanner.nextLine();
+    double amount;
+    String inputCategory = null; // Используем переданную категорию как значение по умолчанию
+
+    while (true) {
+      System.out.print("Введите сумму дохода: ");
+      try {
+        amount = scanner.nextDouble();
+        scanner.nextLine();
+        break; // Выходим из цикла, если ввод корректен
+      } catch (InputMismatchException e) {
+        System.out.println("Ошибка! Введите числовое значение.");
+        scanner.nextLine(); // Считываем лишний символ перевода строки
+      }
+    }
+
+    while (inputCategory == null || inputCategory.isEmpty()) {
+      System.out.print("Введите категорию дохода: ");
+      inputCategory = scanner.nextLine();
+      if (inputCategory.isEmpty()) {
+        System.out.println("Ошибка! Категория не может быть пустой.");
+      }
+    }
 
     incomeList.add(amount); // Добавляет сумму дохода в список доходов
-    System.out.println("Доход в категории '" + category + "' успешно добавлен.");
-    incomeCategories.add(category); // Добавляет категорию дохода в список категорий доходов
+    System.out.println("Доход в категории '" + inputCategory + "' успешно добавлен.");
+    incomeCategories.add(inputCategory); // Добавляет категорию дохода в список категорий доходов
   }
 
   public List<String> getIncomeCategories() {
@@ -72,13 +92,32 @@ public class FinancialManager {
   }
 
   public void addExpense(String category, Scanner scanner) {
-    System.out.print("Введите сумму расхода: ");
-    double amount = this.scanner.nextDouble();
-    this.scanner.nextLine();
+    double amount;
+    String inputCategory = null; // Используем null в качестве значения по умолчанию
 
-    expenseList.add(amount);
-    System.out.println("Расход в категории '" + category + "' успешно добавлен.");
-    expenseCategories.add(category);
+    while (true) {
+      System.out.print("Введите сумму расхода: ");
+      try {
+        amount = scanner.nextDouble();
+        scanner.nextLine();
+        break; // Выходим из цикла, если ввод корректен
+      } catch (InputMismatchException e) {
+        System.out.println("Ошибка! Введите числовое значение.");
+        scanner.nextLine(); // Считываем лишний символ перевода строки
+      }
+    }
+
+    while (inputCategory == null || inputCategory.isEmpty()) {
+      System.out.print("Введите категорию расхода: ");
+      inputCategory = scanner.nextLine();
+      if (inputCategory.isEmpty()) {
+        System.out.println("Ошибка! Категория не может быть пустой.");
+      }
+    }
+
+    expenseList.add(amount); // Добавляет сумму расхода в список расходов
+    System.out.println("Расход в категории '" + inputCategory + "' успешно добавлен.");
+    expenseCategories.add(inputCategory); // Добавляет категорию расхода в список категорий расходов
   }
 
   private double calculateTotal(List<Double> amounts) {
@@ -98,6 +137,8 @@ public class FinancialManager {
     System.out.println("Выберите, что вы хотите отредактировать:");
     System.out.println("1. Редактировать доходы");
     System.out.println("2. Редактировать расходы");
+    System.out.println("3. Удалить доход");
+    System.out.println("4. Удалить расход");
 
     int choice = scanner.nextInt();
     scanner.nextLine(); // Считываем лишний символ перевода строки
@@ -109,17 +150,69 @@ public class FinancialManager {
       case 2:
         editExpense();
         break;
+      case 3:
+        deleteIncome();
+        break;
+      case 4:
+        deleteExpense();
+        break;
       default:
         System.out.println("Некорректный выбор.");
         break;
     }
   }
 
+  private void deleteIncome() {
+    System.out.println("Выберите номер дохода, который вы хотите удалить:");
+    for (int i = 0; i < incomeList.size(); i++) {
+      System.out.println(
+          (i + 1) + ". Категория: " + incomeCategories.get(i) + ", Сумма: " + incomeList.get(i));
+    }
+
+    int index = scanner.nextInt();
+    scanner.nextLine(); // Считываем лишний символ перевода строки
+
+    deleteIncomeByNumber(index);
+  }
+
+  private void deleteExpense() {
+    System.out.println("Выберите номер расхода, который вы хотите удалить:");
+    for (int i = 0; i < expenseList.size(); i++) {
+      System.out.println(
+          (i + 1) + ". Категория: " + expenseCategories.get(i) + ", Сумма: " + expenseList.get(i));
+    }
+
+    int index = scanner.nextInt();
+    scanner.nextLine(); // Считываем лишний символ перевода строки
+
+    deleteExpenseByNumber(index);
+  }
+
+  public void deleteExpenseByNumber(int number) {
+    if (number >= 1 && number <= expenseList.size()) {
+      expenseList.remove(number - 1);
+      expenseCategories.remove(number - 1);
+      System.out.println("Расход успешно удален.");
+    } else {
+      System.out.println("Некорректный номер расхода.");
+    }
+  }
+
+  public void deleteIncomeByNumber(int number) {
+    if (number >= 1 && number <= incomeList.size()) {
+      incomeList.remove(number - 1);
+      incomeCategories.remove(number - 1);
+      System.out.println("Доход успешно удален.");
+    } else {
+      System.out.println("Некорректный номер дохода.");
+    }
+  }
 
   private void editIncome() {
     System.out.println("Выберите номер дохода, который вы хотите отредактировать:");
     for (int i = 0; i < incomeList.size(); i++) {
-      System.out.println((i + 1) + ". " + incomeList.get(i));
+      System.out.println(
+          (i + 1) + ". Категория: " + incomeCategories.get(i) + ", Сумма: " + incomeList.get(i));
     }
 
     int index = scanner.nextInt();
@@ -130,11 +223,12 @@ public class FinancialManager {
       return;
     }
 
+    System.out.print("Введите новую категорию дохода: ");
+    String newIncomeCategory = scanner.nextLine();
+
     System.out.print("Введите новое значение дохода: ");
     double newIncome = scanner.nextDouble();
     scanner.nextLine();
-
-    String newIncomeCategory = ChooseCategory.chooseCategory();
 
     incomeList.set(index - 1, newIncome);
     incomeCategories.set(index - 1, newIncomeCategory);
@@ -145,7 +239,8 @@ public class FinancialManager {
   private void editExpense() {
     System.out.println("Выберите номер расхода, который вы хотите отредактировать:");
     for (int i = 0; i < expenseList.size(); i++) {
-      System.out.println((i + 1) + ". " + expenseList.get(i));
+      System.out.println(
+          (i + 1) + ". Категория: " + expenseCategories.get(i) + ", Сумма: " + expenseList.get(i));
     }
 
     int index = scanner.nextInt();
@@ -156,12 +251,12 @@ public class FinancialManager {
       return;
     }
 
+    System.out.print("Введите новую категорию расхода: ");
+    String newExpenseCategory = scanner.nextLine();
+
     System.out.print("Введите новое значение расхода: ");
     double newExpense = scanner.nextDouble();
     scanner.nextLine();
-
-    System.out.print("Введите новую категорию расхода: ");
-    String newExpenseCategory = scanner.nextLine();
 
     expenseList.set(index - 1, newExpense);
     expenseCategories.set(index - 1, newExpenseCategory);
@@ -194,7 +289,7 @@ public class FinancialManager {
     System.out.println("Расходы:");
     for (int i = 0; i < expenseList.size(); i++) {
       System.out.println(
-              (i + 1) + ": " + incomeCategories.get(i) + ": Сумма: " + expenseList.get(i));
+          (i + 1) + ": " + expenseCategories.get(i) + ": Сумма: " + expenseList.get(i));
     }
   }
 

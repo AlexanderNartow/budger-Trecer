@@ -16,7 +16,7 @@ public class TrackerSave {
    * @param expenseList
    */
   public static void saveFinancialHistory(List<String> incomeCategories, List<Double> incomeList,
-                                          List<String> expenseCategories, List<Double> expenseList) {
+      List<String> expenseCategories, List<Double> expenseList) {
     try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
       writer.println("Доходы");
       for (int i = 0; i < incomeList.size(); i++) {
@@ -34,7 +34,6 @@ public class TrackerSave {
   }
 
   /**
-   *
    * @param type
    * @return
    */
@@ -87,4 +86,5 @@ public class TrackerSave {
     }
 
     return data;
-}}
+  }
+}
